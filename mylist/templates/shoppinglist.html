@@ -83,10 +83,296 @@
             z-index: 1;
         }
 
-        .container {
-            max-width: 560px;
-            margin: 32px auto;
+        .main-layout {
+            max-width: 1560px;
+            margin: 52px auto;
             padding: 0 20px 100px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 56px;
+            align-items: start;
+        }
+
+        @media (max-width: 1000px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .lists-column { grid-template-columns: 1fr; }
+        }
+
+        .lists-column {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .lists-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* ── Rechte Spalte ── */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* ── Kalender ── */
+        .calendar-card {
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        /* ── Notizen ── */
+        .notes-card {
+            background: var(--surface);
+            border-radius: 16px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .notes-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notes-header span {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex: 1;
+        }
+
+        .notes-input-area {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .notes-input-area textarea {
+            flex: 1;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 14px;
+            font-family: inherit;
+            color: var(--text);
+            resize: none;
+            outline: none;
+            min-height: 72px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+            background: var(--bg);
+        }
+
+        .notes-input-area textarea:focus {
+            border-color: var(--magenta);
+            box-shadow: var(--glow-magenta);
+        }
+
+        .notes-add-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--magenta) 0%, var(--bordeaux) 100%);
+            border: none;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .notes-add-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 28px rgba(192, 0, 106, 0.6);
+        }
+
+        .notes-list {
+            padding: 8px 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .note-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .note-item:last-child { border-bottom: none; }
+
+        .note-text { flex: 1; white-space: pre-wrap; word-break: break-word; }
+
+        .notes-empty {
+            padding: 24px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .cal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cal-nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--bordeaux);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            transition: background 0.15s;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .cal-nav button:hover { background: var(--border); }
+
+        #cal-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--bordeaux);
+        }
+
+        .cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            padding: 10px 12px 4px;
+            gap: 2px;
+        }
+
+        .cal-weekdays span {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            padding: 4px 12px 12px;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.12s;
+            color: var(--text);
+        }
+
+        .cal-day:hover { background: var(--border); }
+        .cal-empty { cursor: default; }
+        .cal-empty:hover { background: none; }
+
+        .cal-today {
+            font-weight: 700;
+            color: var(--magenta);
+        }
+
+        .cal-selected {
+            background: linear-gradient(135deg, var(--magenta), var(--bordeaux)) !important;
+            color: white !important;
+        }
+
+        .cal-has-events .event-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--magenta);
+            position: absolute;
+            bottom: 3px;
+        }
+
+        .cal-selected .event-dot { background: rgba(255,255,255,0.8); }
+
+        .day-panel {
+            border-top: 1px solid var(--border);
+            padding: 14px 20px;
+        }
+
+        .day-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .day-panel-header strong {
+            font-size: 13px;
+            color: var(--bordeaux);
+        }
+
+        .add-event-btn {
+            background: none;
+            border: 1.5px solid var(--magenta);
+            color: var(--magenta);
+            border-radius: 8px;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .add-event-btn:hover {
+            background: var(--magenta);
+            color: white;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text);
+        }
+
+        .event-item:last-child { border-bottom: none; }
+
+        .no-events {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 8px 0;
         }
 
         .card {
@@ -219,34 +505,194 @@
             transform: scale(0.96);
         }
 
-        .card + .card {
-            margin-top: 24px;
-        }
-
         .card-header {
             justify-content: space-between;
         }
 
-        .delete-btn {
+        .item-actions {
             margin-left: auto;
-            background: none;
-            border: none;
-            color: var(--border);
-            font-size: 18px;
-            cursor: pointer;
-            line-height: 1;
-            padding: 4px 6px;
-            border-radius: 6px;
-            transition: color 0.15s ease, background 0.15s ease;
+            display: flex;
+            gap: 4px;
             flex-shrink: 0;
         }
 
-        .list-item:hover .delete-btn {
+        .edit-btn, .delete-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: background 0.15s ease, transform 0.1s ease;
+            flex-shrink: 0;
+        }
+
+        .edit-btn {
+            color: var(--bordeaux);
+        }
+
+        .edit-btn:hover {
+            background: rgba(122, 0, 53, 0.1);
+            transform: scale(1.1);
+        }
+
+        .delete-btn {
             color: var(--magenta);
         }
 
         .delete-btn:hover {
-            background: rgba(192, 0, 106, 0.08);
+            background: rgba(192, 0, 106, 0.12);
+            transform: scale(1.1);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(42, 16, 32, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 20px;
+            box-shadow: 0 12px 48px rgba(122, 0, 53, 0.25);
+            border: 1px solid var(--border);
+            padding: 28px 28px 24px;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 20px;
+            animation: modalIn 0.18s ease;
+        }
+
+        @keyframes modalIn {
+            from { transform: scale(0.93); opacity: 0; }
+            to   { transform: scale(1);    opacity: 1; }
+        }
+
+        .modal h2 {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--bordeaux);
+            margin-bottom: 16px;
+        }
+
+        .modal input[type="text"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .modal input[type="text"]:focus {
+            border-color: var(--magenta);
+            box-shadow: var(--glow-magenta);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            background: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-cancel:hover {
+            background: var(--bg);
+        }
+
+        .btn-confirm {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, var(--magenta) 0%, var(--bordeaux) 100%);
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(192, 0, 106, 0.35);
+            transition: box-shadow 0.15s, transform 0.15s;
+        }
+
+        .btn-confirm:hover {
+            box-shadow: 0 5px 18px rgba(192, 0, 106, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .fab {
+            position: fixed;
+            right: 28px;
+            bottom: 28px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--magenta) 0%, var(--bordeaux) 100%);
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: var(--shadow-btn);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fab:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 28px rgba(192, 0, 106, 0.6);
+        }
+
+        .fab:active {
+            transform: scale(0.96);
+        }
+
+        .fab-tooltip {
+            position: fixed;
+            right: 96px;
+            bottom: 40px;
+            background: var(--bordeaux);
+            color: white;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+        }
+
+        .fab:hover + .fab-tooltip {
+            opacity: 1;
         }
     </style>
 </head>
@@ -257,72 +703,416 @@
         <p>Die Anwendung fürs gemeinsame Planen</p>
     </header>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <div class="dot"></div>
-                <span>Erledigungen</span>
-                <button class="add-btn" onclick="addItem('erledigungen')">+</button>
+    <div class="main-layout">
+
+        <!-- Linke Spalte: Listen -->
+        <div class="lists-column">
+            <div class="lists-col">
+                {% for liste in all_lists %}{% if not forloop.counter|divisibleby:2 %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="dot"></div>
+                        <span>{{ liste.name }}</span>
+                        <button class="add-btn" onclick="addItem({{ liste.id }}, '{{ liste.name }}')">+</button>
+                    </div>
+                    {% for row in liste.items.all %}
+                    <div class="list-item">
+                        <input type="checkbox" id="item-{{ row.id }}">
+                        <label for="item-{{ row.id }}">{{ row.name }}</label>
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editItem({{ row.id }}, '{{ row.name|escapejs }}')">🖋</button>
+                            <button class="delete-btn" onclick="deleteItem({{ row.id }}, this)">✕</button>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="empty-state">
+                        <div class="icon">📋</div>
+                        Noch keine Einträge.<br>Tippe auf <strong>+</strong> um loszulegen.
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}{% endfor %}
             </div>
-            {% for row in erledigungen %}
-            <div class="list-item">
-                <input type="checkbox" id="item-{{ row.id }}">
-                <label for="item-{{ row.id }}">{{ row.name }}</label>
-                <button class="delete-btn" onclick="deleteItem({{ row.id }}, this)">✕</button>
+            <div class="lists-col">
+                {% for liste in all_lists %}{% if forloop.counter|divisibleby:2 %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="dot"></div>
+                        <span>{{ liste.name }}</span>
+                        <button class="add-btn" onclick="addItem({{ liste.id }}, '{{ liste.name }}')">+</button>
+                    </div>
+                    {% for row in liste.items.all %}
+                    <div class="list-item">
+                        <input type="checkbox" id="item-{{ row.id }}">
+                        <label for="item-{{ row.id }}">{{ row.name }}</label>
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editItem({{ row.id }}, '{{ row.name|escapejs }}')">🖋</button>
+                            <button class="delete-btn" onclick="deleteItem({{ row.id }}, this)">✕</button>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="empty-state">
+                        <div class="icon">📋</div>
+                        Noch keine Einträge.<br>Tippe auf <strong>+</strong> um loszulegen.
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}{% endfor %}
             </div>
-            {% empty %}
-            <div class="empty-state">
-                <div class="icon">✅</div>
-                Noch keine Einträge.<br>Tippe auf <strong>+</strong> um loszulegen.
-            </div>
-            {% endfor %}
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <div class="dot"></div>
-                <span>Besorgungen</span>
-                <button class="add-btn" onclick="addItem('besorgungen')">+</button>
+        <!-- Rechte Spalte: Kalender + Notizen -->
+        <div class="right-column">
+            <div class="calendar-card">
+                <div class="cal-nav">
+                    <button onclick="prevMonth()">&#8249;</button>
+                    <span id="cal-title"></span>
+                    <button onclick="nextMonth()">&#8250;</button>
+                </div>
+                <div class="cal-weekdays">
+                    <span>Mo</span><span>Di</span><span>Mi</span>
+                    <span>Do</span><span>Fr</span><span>Sa</span><span>So</span>
+                </div>
+                <div id="cal-grid"></div>
+                <div class="day-panel" id="day-panel" style="display:none;"></div>
             </div>
-            {% for row in besorgungen %}
-            <div class="list-item">
-                <input type="checkbox" id="item-{{ row.id }}">
-                <label for="item-{{ row.id }}">{{ row.name }}</label>
-                <button class="delete-btn" onclick="deleteItem({{ row.id }}, this)">✕</button>
+
+            <div class="notes-card">
+                <div class="notes-header">
+                    <div class="dot"></div>
+                    <span>Notizen</span>
+                </div>
+                <div class="notes-input-area">
+                    <textarea id="notes-textarea" placeholder="Notiz eingeben …" lang="de"
+                              onkeydown="if(event.key==='Enter' && event.ctrlKey) addNote()"></textarea>
+                    <button class="notes-add-btn" onclick="addNote()">+</button>
+                </div>
+                <div class="notes-list" id="notes-list"></div>
             </div>
-            {% empty %}
-            <div class="empty-state">
-                <div class="icon">🛒</div>
-                Noch keine Einträge.<br>Tippe auf <strong>+</strong> um loszulegen.
+        </div>
+
+    </div>
+
+    <!-- Modal: Eintrag hinzufügen -->
+    <div class="modal-overlay" id="modal-item" onclick="closeOnOverlay(event, 'modal-item')">
+        <div class="modal">
+            <h2 id="modal-item-title">Neuer Eintrag</h2>
+            <input type="text" id="modal-item-input" placeholder="Name eingeben …"
+                   onkeydown="if(event.key==='Enter') confirmAdd()">
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('modal-item')">Abbrechen</button>
+                <button class="btn-confirm" onclick="confirmAdd()">Hinzufügen</button>
             </div>
-            {% endfor %}
         </div>
     </div>
 
+    <!-- Modal: Eintrag bearbeiten -->
+    <div class="modal-overlay" id="modal-edit" onclick="closeOnOverlay(event, 'modal-edit')">
+        <div class="modal">
+            <h2>Eintrag bearbeiten</h2>
+            <input type="text" id="modal-edit-input" placeholder="Neuer Name …"
+                   onkeydown="if(event.key==='Enter') confirmEdit()">
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('modal-edit')">Abbrechen</button>
+                <button class="btn-confirm" onclick="confirmEdit()">Speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Neue Liste erstellen -->
+    <div class="modal-overlay" id="modal-list" onclick="closeOnOverlay(event, 'modal-list')">
+        <div class="modal">
+            <h2>Neue Liste erstellen</h2>
+            <input type="text" id="modal-list-input" placeholder="Listenname …"
+                   onkeydown="if(event.key==='Enter') confirmCreateList()">
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('modal-list')">Abbrechen</button>
+                <button class="btn-confirm" onclick="confirmCreateList()">Erstellen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Termin hinzufügen -->
+    <div class="modal-overlay" id="modal-event" onclick="closeOnOverlay(event, 'modal-event')">
+        <div class="modal">
+            <h2 id="modal-event-title">Neuer Termin</h2>
+            <input type="text" id="modal-event-input" placeholder="Terminbeschreibung …"
+                   onkeydown="if(event.key==='Enter') confirmAddEvent()">
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal('modal-event')">Abbrechen</button>
+                <button class="btn-confirm" onclick="confirmAddEvent()">Speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAB: Neue Liste -->
+    <button class="fab" onclick="openListModal()">+</button>
+    <div class="fab-tooltip">Neue Liste</div>
+
     <script>
+        let currentListId = null;
+
+        // --- Eintrag hinzufügen ---
+        function addItem(listId, listName) {
+            currentListId = listId;
+            document.getElementById('modal-item-title').textContent = 'Neuer Eintrag in "' + listName + '"';
+            document.getElementById('modal-item-input').value = '';
+            document.getElementById('modal-item').classList.add('open');
+            setTimeout(() => document.getElementById('modal-item-input').focus(), 50);
+        }
+
+        function confirmAdd() {
+            let itemName = document.getElementById('modal-item-input').value.trim();
+            if (!itemName) return;
+            closeModal('modal-item');
+            let token = '{{ csrf_token }}';
+            let formData = new FormData();
+            formData.append('itemName', itemName);
+            formData.append('list_id', currentListId);
+            formData.append('csrfmiddlewaretoken', token);
+            fetch('/mylist/', { method: 'POST', body: formData })
+                .then(() => location.reload());
+        }
+
+        // --- Neue Liste erstellen ---
+        function openListModal() {
+            document.getElementById('modal-list-input').value = '';
+            document.getElementById('modal-list').classList.add('open');
+            setTimeout(() => document.getElementById('modal-list-input').focus(), 50);
+        }
+
+        function confirmCreateList() {
+            let listName = document.getElementById('modal-list-input').value.trim();
+            if (!listName) return;
+            closeModal('modal-list');
+            let token = '{{ csrf_token }}';
+            let formData = new FormData();
+            formData.append('listName', listName);
+            formData.append('csrfmiddlewaretoken', token);
+            fetch('/mylist/create-list/', { method: 'POST', body: formData })
+                .then(() => location.reload());
+        }
+
+        // --- Eintrag bearbeiten ---
+        let currentEditId = null;
+
+        function editItem(id, currentName) {
+            currentEditId = id;
+            document.getElementById('modal-edit-input').value = currentName;
+            document.getElementById('modal-edit').classList.add('open');
+            setTimeout(() => {
+                const input = document.getElementById('modal-edit-input');
+                input.focus();
+                input.select();
+            }, 50);
+        }
+
+        function confirmEdit() {
+            let newName = document.getElementById('modal-edit-input').value.trim();
+            if (!newName) return;
+            closeModal('modal-edit');
+            let token = '{{ csrf_token }}';
+            let formData = new FormData();
+            formData.append('newName', newName);
+            formData.append('csrfmiddlewaretoken', token);
+            fetch('/mylist/edit/' + currentEditId + '/', { method: 'POST', body: formData })
+                .then(() => location.reload());
+        }
+
+        // --- Eintrag löschen ---
         function deleteItem(id, btn) {
             let token = '{{ csrf_token }}';
             let formData = new FormData();
             formData.append('csrfmiddlewaretoken', token);
-            fetch('/mylist/delete/' + id + '/', {
-                method: 'POST',
-                body: formData
-            }).then(() => btn.closest('.list-item').remove());
+            fetch('/mylist/delete/' + id + '/', { method: 'POST', body: formData })
+                .then(() => btn.closest('.list-item').remove());
         }
 
-        function addItem(listType) {
-            let itemName = prompt('Neues Element hinzufügen')
-            if (!itemName || !itemName.trim()) return;
-            let token = '{{ csrf_token }}';
-            let formData = new FormData();
-            formData.append('itemName', itemName.trim());
-            formData.append('list_type', listType);
-            formData.append('csrfmiddlewaretoken', token);
-            fetch('/mylist/', {
-                method: 'POST',
-                body: formData
-            }).then(() => location.reload());
+        // --- Modal-Hilfsfunktionen ---
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('open');
         }
+
+        function closeOnOverlay(event, id) {
+            if (event.target === document.getElementById(id)) closeModal(id);
+        }
+
+        // ══════════════════════════════
+        // Kalender
+        // ══════════════════════════════
+        const MONTHS = ['Januar','Februar','März','April','Mai','Juni',
+                        'Juli','August','September','Oktober','November','Dezember'];
+        const today = new Date();
+        let calYear  = today.getFullYear();
+        let calMonth = today.getMonth();
+        let selectedDate = null;
+        let allEvents = {};   // { 'YYYY-MM-DD': [{id, title}, ...] }
+        let selectedEventDate = null;
+
+        function toDateStr(y, m, d) {
+            return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        }
+
+        async function loadEvents() {
+            const res = await fetch('/mylist/events/');
+            const data = await res.json();
+            allEvents = {};
+            for (const e of data.events) {
+                if (!allEvents[e.date]) allEvents[e.date] = [];
+                allEvents[e.date].push(e);
+            }
+            renderCalendar();
+            if (selectedDate) renderDayPanel(selectedDate);
+        }
+
+        function renderCalendar() {
+            document.getElementById('cal-title').textContent =
+                `${MONTHS[calMonth]} ${calYear}`;
+
+            const firstDow = (new Date(calYear, calMonth, 1).getDay() + 6) % 7; // Mo=0
+            const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+            const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
+            let html = '';
+            for (let i = 0; i < firstDow; i++)
+                html += '<div class="cal-day cal-empty"></div>';
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const ds = toDateStr(calYear, calMonth, d);
+                const cls = [
+                    'cal-day',
+                    ds === todayStr    ? 'cal-today'    : '',
+                    ds === selectedDate ? 'cal-selected' : '',
+                    allEvents[ds]      ? 'cal-has-events': '',
+                ].filter(Boolean).join(' ');
+                const dot = allEvents[ds] ? '<span class="event-dot"></span>' : '';
+                html += `<div class="${cls}" onclick="selectDay('${ds}')">${d}${dot}</div>`;
+            }
+            document.getElementById('cal-grid').innerHTML = html;
+        }
+
+        function selectDay(ds) {
+            selectedDate = ds;
+            renderCalendar();
+            renderDayPanel(ds);
+        }
+
+        function renderDayPanel(ds) {
+            const [y, m, d] = ds.split('-');
+            const dateObj = new Date(+y, +m - 1, +d);
+            const weekdays = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+            const label = `${weekdays[dateObj.getDay()]}, ${+d}. ${MONTHS[+m-1]} ${y}`;
+
+            const dayEvts = allEvents[ds] || [];
+            const evtHtml = dayEvts.map(e =>
+                `<div class="event-item">
+                    <span>${e.title}</span>
+                    <button class="delete-btn" style="font-size:13px;"
+                            onclick="removeEvent(${e.id})">✕</button>
+                 </div>`
+            ).join('') || '<p class="no-events">Keine Termine</p>';
+
+            document.getElementById('day-panel').innerHTML =
+                `<div class="day-panel-header">
+                    <strong>${label}</strong>
+                    <button class="add-event-btn" onclick="openEventModal('${ds}')">+ Termin</button>
+                 </div>${evtHtml}`;
+            document.getElementById('day-panel').style.display = 'block';
+        }
+
+        function openEventModal(ds) {
+            selectedEventDate = ds;
+            const [y, m, d] = ds.split('-');
+            document.getElementById('modal-event-title').textContent =
+                `Termin am ${+d}. ${MONTHS[+m-1]} ${y}`;
+            document.getElementById('modal-event-input').value = '';
+            document.getElementById('modal-event').classList.add('open');
+            setTimeout(() => document.getElementById('modal-event-input').focus(), 50);
+        }
+
+        async function confirmAddEvent() {
+            const title = document.getElementById('modal-event-input').value.trim();
+            if (!title) return;
+            closeModal('modal-event');
+            const fd = new FormData();
+            fd.append('date', selectedEventDate);
+            fd.append('title', title);
+            fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            await fetch('/mylist/events/', { method: 'POST', body: fd });
+            await loadEvents();
+        }
+
+        async function removeEvent(id) {
+            const fd = new FormData();
+            fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            await fetch('/mylist/events/delete/' + id + '/', { method: 'POST', body: fd });
+            await loadEvents();
+        }
+
+        function prevMonth() {
+            if (--calMonth < 0) { calMonth = 11; calYear--; }
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            if (++calMonth > 11) { calMonth = 0; calYear++; }
+            renderCalendar();
+        }
+
+        loadEvents();
+
+        // ══════════════════════════════
+        // Notizen
+        // ══════════════════════════════
+        async function loadNotes() {
+            const res = await fetch('/mylist/notes/');
+            const data = await res.json();
+            renderNotes(data.notes);
+        }
+
+        function renderNotes(notesList) {
+            const container = document.getElementById('notes-list');
+            if (!notesList.length) {
+                container.innerHTML = '<p class="notes-empty">Noch keine Notizen.</p>';
+                return;
+            }
+            container.innerHTML = notesList.map(n =>
+                `<div class="note-item" id="note-${n.id}">
+                    <span class="note-text">${escapeHtml(n.text)}</span>
+                    <button class="delete-btn" style="font-size:13px;flex-shrink:0;"
+                            onclick="deleteNote(${n.id})">✕</button>
+                 </div>`
+            ).join('');
+        }
+
+        async function addNote() {
+            const ta = document.getElementById('notes-textarea');
+            const text = ta.value.trim();
+            if (!text) return;
+            const fd = new FormData();
+            fd.append('text', text);
+            fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            await fetch('/mylist/notes/', { method: 'POST', body: fd });
+            ta.value = '';
+            await loadNotes();
+        }
+
+        async function deleteNote(id) {
+            const fd = new FormData();
+            fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+            await fetch('/mylist/notes/delete/' + id + '/', { method: 'POST', body: fd });
+            document.getElementById('note-' + id).remove();
+            if (!document.querySelector('.note-item'))
+                document.getElementById('notes-list').innerHTML =
+                    '<p class="notes-empty">Noch keine Notizen.</p>';
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g,'&amp;').replace(/</g,'&lt;')
+                      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+
+        loadNotes();
     </script>
 
 </body>
