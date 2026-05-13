@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Einkaufsliste.urls'
+ROOT_URLCONF = 'Gemeinschaftsplanung.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Einkaufsliste.wsgi.application'
+WSGI_APPLICATION = 'Gemeinschaftsplanung.wsgi.application'
 
 
 # Database
