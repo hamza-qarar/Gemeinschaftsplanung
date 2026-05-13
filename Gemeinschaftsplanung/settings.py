@@ -25,6 +25,7 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost,192.168.178
 # Railway setzt diese Variable automatisch
 if os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
     ALLOWED_HOSTS.append(os.environ.get('RAILWAY_PUBLIC_DOMAIN'))
+    CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('RAILWAY_PUBLIC_DOMAIN')}"]
 
 
 # Application definition
