@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 from mylist.views import mylist, delete_item, edit_item, create_list, events, delete_event, notes, delete_note
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/mylist/')),
     path('admin/', admin.site.urls),
     path('mylist/', mylist),
     path('mylist/delete/<int:item_id>/', delete_item),
