@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 from datetime import date
 
 class ShoppingList(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lists', null=True, blank=True)
     name = models.CharField(max_length=200)
     created_at = models.DateField(default=date.today)
 
@@ -19,6 +21,7 @@ class ShoppingItem(models.Model):
 
 
 class CalendarEvent(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events', null=True, blank=True)
     date = models.DateField()
     title = models.CharField(max_length=200)
 
@@ -30,6 +33,7 @@ class CalendarEvent(models.Model):
 
 
 class Note(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notes', null=True, blank=True)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

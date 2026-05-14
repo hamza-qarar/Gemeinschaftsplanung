@@ -83,6 +83,33 @@
             z-index: 1;
         }
 
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
         .main-layout {
             max-width: 1560px;
             margin: 52px auto;
@@ -712,8 +739,16 @@
 <body>
 
     <header>
-        <h1>Gemeinschaftsplanung</h1>
-        <p>Die Anwendung fürs gemeinsame Planen</p>
+        <div class="header-inner">
+            <div>
+                <h1>Gemeinschaftsplanung</h1>
+                <p>Die Anwendung fürs gemeinsame Planen</p>
+            </div>
+            <form method="post" action="/logout/" style="margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Abmelden</button>
+            </form>
+        </div>
     </header>
 
     <div class="main-layout">
