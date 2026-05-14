@@ -1,18 +1,19 @@
 <!--
 =================================================================================
-shoppinglist.html – Hauptseite der Anwendung
+shoppinglist.html - Hauptseite der Anwendung
 =================================================================================
-Diese Datei ist ein Django-Template. Sie enthält:
+Diese Datei ist ein Django-Template. Sie enthaelt:
   - HTML  → Struktur der Seite (was angezeigt wird)
   - CSS   → Gestaltung (wie es aussieht)
-  - JS    → Interaktivität (was beim Klicken passiert)
+  - JS    → Interaktivitaet (was beim Klicken passiert)
 
 Django-Template-Tags werden von Django serverseitig verarbeitet, BEVOR die
-Seite an den Browser gesendet wird:
-  {{ variable }}        → gibt einen Wert aus (z. B. {{ liste.name }})
-  {% for x in liste %}  → Schleife
-  {% if bedingung %}    → Bedingung
-  {% csrf_token %}      → fügt ein Sicherheitstoken gegen CSRF-Angriffe ein
+Seite an den Browser gesendet wird. Beispiele (ohne spitze Klammern geschrieben,
+da Django sie sonst ausfuehren wuerde):
+  DOPPELTE_KLAMMER variable DOPPELTE_KLAMMER  → gibt einen Wert aus
+  PROZENT for x in liste PROZENT             → Schleife
+  PROZENT if bedingung PROZENT               → Bedingung
+  PROZENT csrf_token PROZENT                 → Sicherheitstoken
 =================================================================================
 -->
 <!DOCTYPE html>
